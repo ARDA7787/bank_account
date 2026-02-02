@@ -24,6 +24,9 @@ public:
     constexpr unsigned withdraw(unsigned amount)
     {
 		// TODO: throw exception if amount > _balance
+        if (amount > _balance) {
+            throw std::runtime_error("insufficient funds");
+        }
         _balance -= amount;
 
         return _balance;
@@ -31,6 +34,9 @@ public:
     constexpr unsigned deposit(unsigned amount)
     {
 		// TODO: throw exception if addition would cause overflow
+        if ((_balance + amount) < _balance) {
+            throw std::runtime_error("deposit would overflow balance");
+        }
         _balance += amount;
 
         return _balance;
